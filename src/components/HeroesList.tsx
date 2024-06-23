@@ -42,7 +42,7 @@ export default function HeroesList() {
   };
 
   return (
-    <div className="container mt-5 mx-auto">
+    <>
       <h2 className="text-2xl">My heroes</h2>
       <ul className="flex flex-col gap-2 my-3">
         {heroes.map((hero) => (
@@ -62,6 +62,6 @@ export default function HeroesList() {
       </ul>
 
       <HeroDetail hero={selectedHero} onNameChange={handleNameChange} />
-    </div>
+    </>
   );
 }
