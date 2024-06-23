@@ -1,14 +1,29 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Hero } from "./types/hero";
-import { HEROES } from "./data/mock-heroes";
 import HeroDetail from "./components/HeroDetail";
 
 export default function App() {
-  const [heroes, setHeroes] = useState<Hero[]>(HEROES);
+  // so that it doesn't fetch twice with the strict mode
+  const fetched = useRef(false);
+
+  const [heroes, setHeroes] = useState<Hero[]>([]);
 
   const [selectedHeroId, setSelectedHeroId] = useState<number | null>(null);
   const selectedHero = heroes.find((hero) => hero.id === selectedHeroId);
+
+  useEffect(() => {
+    if (!fetched.current) {
+      fetch("http://localhost:3000/heroes")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setHeroes(data);
+        });
+      fetched.current = true;
+    }
+  }, []); // execute once
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const updatedName = event.target.value;
