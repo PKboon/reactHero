@@ -4,4 +4,7 @@
 
 a.active {
   color: blue;
+  background-color: rgba(0, 0, 255, 0.15);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
 }
