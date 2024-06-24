@@ -10,6 +10,7 @@ import {
 import Dashboard from "./components/Dashboard.tsx";
 import HeroesList from "./components/HeroesList.tsx";
 import HeroDetail from "./components/HeroDetail.tsx";
+import { MessageProvider } from "./context/MessageContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // strict mode is for the clean up code that will run before the useEffect started
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MessageProvider>
+      <RouterProvider router={router} />
+    </MessageProvider>
   </React.StrictMode>
 );
